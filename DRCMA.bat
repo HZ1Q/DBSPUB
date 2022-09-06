@@ -29,6 +29,7 @@ echo **********************************************************************
 echo Do you want to install the SQL GURU tool?
 set /p installsqlguru=(Y/N?)
 cls
+
 echo **********************************************************************
 rem Set the company name
 echo Enter the comapny name and press enter.
