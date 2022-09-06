@@ -1,5 +1,4 @@
 @echo off
-
 echo.
 echo **********************************************************************
 echo This is DB backup script for the RCM server. This script will backup
