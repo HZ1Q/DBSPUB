@@ -27,7 +27,7 @@ echo View all configured employees
 echo View all globally configured employees
 echo.
 echo Do you want to install the SQL GURU tool?
-sep /p installsqlguru=(Y/N?)
+set /p installsqlguru=(Y/N?)
 cls
 echo **********************************************************************
 rem Set the company name
@@ -115,7 +115,7 @@ rem Create SQL script to Backup the RCM db
 	) 1>"C:\%companyname%\Scripts\Backup RCM DB.sql"
 )
 
-if /I installsqlguru='n' goto installarchiver
+if /I installsqlguru=='n' goto installarchiver
 rem **********************************************************************
 rem Create AuditSafeDrop.sql query
 	if not exist "C:\%companyname%\Scripts\AuditSafeDrop.sql" (
