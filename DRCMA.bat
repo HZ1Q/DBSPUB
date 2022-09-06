@@ -1,8 +1,35 @@
 @echo on
 
+echo.
+echo **********************************************************************
+echo This is DB backup script for the RCM server. This script will backup
+echo the RCM database every day at midnight. You will be able to customize 
+echo some of the backup parameters in the following prompts.
+echo **********************************************************************
+echo.
+pause
+cls
+rem **********************************************************************
+echo.
+echo Do you want to install the SQL GURU tool? This tool serves a few functions
+echo and is being actively developed. Running the SQL_GURU.bat script from
+echo the desktop will open a window to run these queries. All output from the
+echo script will be output on your desktop in a folder called "SQL OUTPUT"
+echo.
+echo The current features of this tool in this version are as follows:
+echo Create RCMDB backup on demand
+echo Check RCMDB for corruption on demand
+echo Audit POS users pin numbers where the length is ^<6 numbers
+echo Audit safedrop configuration where configured amount is ^> 600.00
+echo View advanced employee information
+echo View basic employee information
+echo View all configured employees
+echo View all globally configured employees
 rem **********************************************************************
 rem Set the company name
-set companyname=Country Fair
+echo Enter the comapny name and press enter.
+set /p companynameprompt=:
+set companyname=%companynameprompt%
 
 rem **********************************************************************
 rem Choose the name of the Database to be backed up
@@ -14,12 +41,17 @@ set dblogin=RCM\RCM
 
 rem **********************************************************************
 rem The db backup file name followed by the date/time of the DB backup. (The date is automatically added. DO NOT ADD THE DATE BELOW!^)
+echo Enter the RCM version number and press enter.
+set /p rcmversionprompt=:
 rem Example: 2019.2.8-CF-RCMDBBackup-20210706.bak
-set dbfilename=2020.4.26.0-CF-RCMDBBackup-
+set dbfilename=%companynameprompt%-RCMDBBackup-%rcmversionprompt%
 
 rem **********************************************************************
 rem Delete backups older than the amount of days specified here.
-set dbbackuphistory=90
+echo How many days of DB backups do you want to keep?
+echo Recommended value is 60
+set rcmdbhistory=:
+set dbbackuphistory=%rcmdbhistory%
 
 rem **********************************************************************
 rem Choose primary backup location for DB backups
