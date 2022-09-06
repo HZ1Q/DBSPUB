@@ -119,7 +119,7 @@ rem Create SQL script to Backup the RCM db
 	) 1>"C:\%companyname%\Scripts\Backup RCM DB.sql"
 )
 
-if /I installsqlguru=='n' goto installarchiver
+if /I '%installsqlguru%'=='n' goto installarchiver
 rem **********************************************************************
 rem Create AuditSafeDrop.sql query
 	if not exist "C:\%companyname%\Scripts\AuditSafeDrop.sql" (
@@ -358,6 +358,8 @@ rem create bat script to check and backup the RCM DB and then archive backups ol
 		echo cls>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		echo PING localhost -n 3 ^>^NUL>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		echo del "%%dbtempfolder%%RCMBackupTempFile.txt">> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
+		rem workaround to mitigate issue where the log files are also stored in the DBTASKFOLDER.
+		echo del "%dbtaskfolder%\*.txt"
 		echo.>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		echo.>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		Echo cls>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
