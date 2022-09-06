@@ -25,7 +25,7 @@ echo View advanced employee information
 echo View basic employee information
 echo View all configured employees
 echo View all globally configured employees
-echo.
+echo **********************************************************************
 echo Do you want to install the SQL GURU tool?
 set /p installsqlguru=(Y/N?)
 cls
