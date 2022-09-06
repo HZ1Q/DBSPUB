@@ -9,8 +9,8 @@ echo **********************************************************************
 echo.
 pause
 cls
-rem **********************************************************************
 echo.
+echo **********************************************************************
 echo Do you want to install the SQL GURU tool? This tool serves a few functions
 echo and is being actively developed. Running the SQL_GURU.bat script from
 echo the desktop will open a window to run these queries. All output from the
@@ -25,7 +25,11 @@ echo View advanced employee information
 echo View basic employee information
 echo View all configured employees
 echo View all globally configured employees
-rem **********************************************************************
+echo.
+echo Do you want to install the SQL GURU tool?
+sep /p installsqlguru=(Y/N?)
+cls
+echo **********************************************************************
 rem Set the company name
 echo Enter the comapny name and press enter.
 set /p companynameprompt=:
@@ -75,37 +79,31 @@ rem Create main folder
 	if not exist "C:\%companyname%\" (
 		mkdir "C:\%companyname%\"
 )
-
 rem **********************************************************************
 rem Create scipts folder
 	if not exist "C:\%companyname%\Scripts" (
 		mkdir "C:\%companyname%\Scripts"
 )
-
 rem **********************************************************************
 rem Create DB Logs folder
 	if not exist "C:\%companyname%\DBLogs\" (
 		mkdir "C:\%companyname%\DBLogs\"
 )
-
 rem **********************************************************************
 rem Create Tasks folder
 	if not exist "C:\%companyname%\Tasks" (
 		mkdir "C:\%companyname%\Tasks"
 )
-
 rem **********************************************************************
 rem Create temp folder
 	if not exist "C:\%companyname%\Temp\" (
 		mkdir "C:\%companyname%\Temp\"
 )
-
 rem **********************************************************************
 rem Create SQL script to check the RCM DB for corruption
 	if not exist "C:\%companyname%\Scripts\Check RCM DB.sql" (
 		echo DBCC CHECKDB>> "C:\%companyname%\Scripts\Check RCM DB.sql"
 )
-
 rem **********************************************************************
 rem Create SQL script to Backup the RCM db
 	if not exist "C:\%companyname%\Scripts\Backup RCM DB.sql" (
@@ -117,6 +115,7 @@ rem Create SQL script to Backup the RCM db
 	) 1>"C:\%companyname%\Scripts\Backup RCM DB.sql"
 )
 
+if /I installsqlguru='n' goto installarchiver
 rem **********************************************************************
 rem Create AuditSafeDrop.sql query
 	if not exist "C:\%companyname%\Scripts\AuditSafeDrop.sql" (
@@ -322,6 +321,8 @@ rem Create SQL_GURU.bat tool
 		echo ^exit
 	) 1>"C:\%companyname%\Scripts\CF_SQL_QRY.bat"
 )
+
+:installarchiver
 rem **********************************************************************
 rem create bat script to check and backup the RCM DB and then archive backups older than 30 days
 	if not exist "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat" (
