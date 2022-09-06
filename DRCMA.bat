@@ -34,6 +34,7 @@ rem Set the company name
 echo Enter the comapny name and press enter.
 set /p companynameprompt=:
 set companyname=%companynameprompt%
+cls
 
 rem **********************************************************************
 rem Choose the name of the Database to be backed up
@@ -49,13 +50,15 @@ echo Enter the RCM version number and press enter.
 set /p rcmversionprompt=:
 rem Example: 2019.2.8-CF-RCMDBBackup-20210706.bak
 set dbfilename=%companynameprompt%-RCMDBBackup-%rcmversionprompt%
+cls
 
 rem **********************************************************************
 rem Delete backups older than the amount of days specified here.
 echo How many days of DB backups do you want to keep?
 echo Recommended value is 60
-set rcmdbhistory=:
+set /p rcmdbhistory=:
 set dbbackuphistory=%rcmdbhistory%
+cls
 
 rem **********************************************************************
 rem Choose primary backup location for DB backups
