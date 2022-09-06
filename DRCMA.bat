@@ -16,14 +16,15 @@ echo the desktop will open a window to run these queries. All output from the
 echo script will be output on your desktop in a folder called "SQL OUTPUT"
 echo.
 echo The current features of this tool in this version are as follows:
-echo Create RCMDB backup on demand
-echo Check RCMDB for corruption on demand
-echo Audit POS users pin numbers where the length is ^<6 numbers
-echo Audit safedrop configuration where configured amount is ^> 600.00
-echo View advanced employee information
-echo View basic employee information
-echo View all configured employees
-echo View all globally configured employees
+echo.
+echo      Create RCMDB backup on demand
+echo      Check RCMDB for corruption on demand
+echo      Audit POS users pin numbers where the length is ^<6 numbers
+echo      Audit safedrop configuration where configured amount is ^> 600.00
+echo      View advanced employee information
+echo      View basic employee information
+echo      View all configured employees
+echo      View all globally configured employees
 echo **********************************************************************
 echo Do you want to install the SQL GURU tool?
 set /p installsqlguru=(Y/N?)
