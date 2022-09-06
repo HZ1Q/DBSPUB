@@ -50,7 +50,7 @@ rem The db backup file name followed by the date/time of the DB backup. (The dat
 echo Enter the RCM version number and press enter.
 set /p rcmversionprompt=:
 rem Example: 2019.2.8-CF-RCMDBBackup-20210706.bak
-set dbfilename=%companynameprompt%-RCMDBBackup-%rcmversionprompt%
+set dbfilename=%companynameprompt%-RCMDBBackup-%rcmversionprompt%-
 cls
 
 rem **********************************************************************
@@ -323,8 +323,19 @@ rem Create SQL_GURU.bat tool
 		echo ^Echo.
 		echo :end
 		echo ^exit
-	) 1>"C:\%companyname%\Scripts\CF_SQL_QRY.bat"
+	) 1>"C:\%companyname%\Scripts\SQL_GURU.bat"
 )
+
+rem **********************************************************************
+rem Create a link to the SQL_GURU.bat on the user desktop.
+set SCRIPT="%TEMP%\%RANDOM%-%RANDOM%-%RANDOM%-%RANDOM%.vbs"
+echo Set oWS = WScript.CreateObject("WScript.Shell") >> %SCRIPT%
+echo sLinkFile = "%USERPROFILE%\Desktop\SQL_GURU.lnk" >> %SCRIPT%
+echo Set oLink = oWS.CreateShortcut(sLinkFile) >> %SCRIPT%
+echo oLink.TargetPath = "C:\%companyname%\Scripts\SQL_GURU.bat" >> %SCRIPT%
+echo oLink.Save >> %SCRIPT%
+cscript /nologo %SCRIPT%
+del %SCRIPT%
 
 :installarchiver
 rem **********************************************************************
@@ -359,12 +370,12 @@ rem create bat script to check and backup the RCM DB and then archive backups ol
 		echo PING localhost -n 3 ^>^NUL>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		echo del "%%dbtempfolder%%RCMBackupTempFile.txt">> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		rem workaround to mitigate issue where the log files are also stored in the DBTASKFOLDER.
-		echo del "%dbtaskfolder%\*.txt"
+		echo del "%%dbtaskfolder%%\*.txt">> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		echo.>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		echo.>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		Echo cls>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		echo.>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
-		Delete DB backups older than X days
+		rem Delete DB backups older than X days
 		echo ForFiles /p "%primarydbbackuploc1%" /s /d -%dbbackuphistory% /c "cmd /c del @file">> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		Echo.>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
 		Echo.>> "C:\%companyname%\Tasks\RCM-DB-BACKUP.bat"
