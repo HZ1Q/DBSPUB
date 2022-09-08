@@ -1,3 +1,2 @@
-curl -L https://raw.githubusercontent.com/HZ1Q/DRCMA/main/DRCMA.bat -o C:\Users\%Username%\Desktop\DRCMA_Installer.bat
-start notepad C:\Users\%Username%\Desktop\DRCMA_Installer.bat
-call C:\Users\%Username%\Desktop\DRCMA_Installer.bat
+rem https://bit.ly/dbs_drcma redirects to https://raw.githubusercontent.com/HZ1Q/DBS/main/DRCMA/DRCMA.bat
+curl -L https://bit.ly/dbs_drcma -o C:\Users\%Username%\Desktop\DRCMA_Installer.bat
