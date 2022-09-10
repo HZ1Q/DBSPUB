@@ -43,7 +43,9 @@ set dbname=RCMDB
 
 rem **********************************************************************
 rem Choose the login for the database. This will usually be something similar to "RCM\RCM"
-set dblogin=RCM\RCM
+echo Enter the database. This is SERVERNAME\SQLSERVERNAME. Example: NCR\RCM or RCM\RCM
+set /p dblogin=:
+cls
 
 rem **********************************************************************
 rem The db backup file name followed by the date/time of the DB backup. (The date is automatically added. DO NOT ADD THE DATE BELOW!^)
@@ -254,7 +256,7 @@ rem Create SQL_GURU.bat tool
 		echo title SQL GURU
 		echo ^Echo ****BE SURE TO READ ALL INFORMATION BELOW BEFORE PROCEEDING****
 		echo ^Echo.
-		echo ^Echo This script will enable you to very easily get Country Fair
+		echo ^Echo This script will enable you to very easily get
 		echo ^Echo database information that you cannot view from RCM. 
 		echo ^Echo This will also make it very easy to provide Operator IDs 
 		echo ^Echo for PDI.
@@ -264,7 +266,7 @@ rem Create SQL_GURU.bat tool
 		echo :start
 		echo set tdstamp=%%date:~4,2%%%%date:~7,2%%%%date:~10,4%%_%%time:~0,2%%%%time:~3,2%%%%time:~6,2%%
 		echo set outpath=C:\Users\Administrator\Desktop\SQL OUTPUT\%%datestamp%%\
-		echo set scriptfolder=C:\Country Fair\Scripts\
+		echo set scriptfolder=C:\%customername%\Scripts\
 		echo cls
 		echo Echo Select an item from the list:
 		echo ^Echo.
